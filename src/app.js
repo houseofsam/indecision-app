@@ -1,70 +1,79 @@
-console.log('App.js is running');
-
-const app = {
-  title: 'Indecision App',
-  subtitle: 'Feeling indecisive? You\'ve come to the right place :)',
-  options: []
-};
-
-// Handle form submission
-const onFormSubmit = (e) => {
-  e.preventDefault();
-
-  const option = e.target.elements.option.value;
-
-  if (option) {
-    // append form data to array
-    app.options.push(option);
-    // reset form
-    e.target.elements.option.value = '';
-    render();
+class IndecisionApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    );
   }
-};
-
-// function to clear list when Remove All button is clicked
-const removeAll = () => {
-  app.options = [];
-  render();
-};
-
-// Pick an option randomly
-const onMakeDecision = () => {
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  // Temp. solution. I'll look into modals later
-  alert(option);
-};
-
-// grab html root div
-let appRoot = document.getElementById('app');
-
-// render function to be invoked upon page load and whenever data is changed (Manual Data Binding)
-const render = () => {
-  // JSX
-  const template = (
-    <div>
-      <h1>{app.title && app.title}</h1>
-      <p>{app.subtitle && app.subtitle}</p>
-      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <button disabled={app.options.length === 0} onClick={onMakeDecision}>Help me decide!</button>
-      <button onClick={removeAll}>Remove All</button>
-
-      <ol>
-        {/* Map over app.options and print them out as list items in browser */}
-        {
-          app.options.map((option, index) => <li key={index}>{option}</li>)
-        }
-      </ol>
-
-      <form onSubmit={onFormSubmit}>
-        <input type="text" name="option"/>
-        <button>Add Option</button>
-      </form>
-    </div>
-  );
-
-  // Grab root div and render JSX inside of it.
-  ReactDOM.render(template, appRoot);
 }
 
-render();
+
+class Header extends React.Component {
+  // React components require render method to be defined
+  render() {
+    return (
+      <div>
+        <h1>Indecision App</h1>
+        <h2>Feeling indecisive? You've come to the right place :)</h2>
+      </div>
+    );
+  }
+}
+
+
+
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>Help me decide!</button>
+        <button>Remove All</button>
+      </div>
+    );
+  }
+}
+
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>'Here are your options' / 'No options' </p>
+        <Option />
+      </div>
+    );
+  }
+}
+
+class Option extends React.Component {
+  render() {
+    return (
+      <div>
+        <ol>
+          <li>one</li>
+          <li>two</li>
+          <li>three</li>
+        </ol>
+      </div>
+    );
+  }
+}
+
+
+class AddOption extends React.Component {
+  render() {
+    return (
+      <div>
+        <form>
+          <input type="text" name="option"/>
+          <button>Add Option</button>
+        </form>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
