@@ -27,6 +27,14 @@ const removeAll = () => {
   render();
 };
 
+// Pick an option randomly
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  // Temp. solution. I'll look into modals later
+  alert(option);
+};
+
 // grab html root div
 let appRoot = document.getElementById('app');
 
@@ -38,15 +46,13 @@ const render = () => {
       <h1>{app.title && app.title}</h1>
       <p>{app.subtitle && app.subtitle}</p>
       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <p>{app.options.length}</p>
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>Help me decide!</button>
       <button onClick={removeAll}>Remove All</button>
 
       <ol>
         {/* Map over app.options and print them out as list items in browser */}
         {
-          app.options.map((option, index) => {
-            return <li key={index}>{option}</li>
-          })
+          app.options.map((option, index) => <li key={index}>{option}</li>)
         }
       </ol>
 
