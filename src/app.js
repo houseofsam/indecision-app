@@ -60,60 +60,46 @@ class IndecisionApp extends React.Component {
   }
 }
 
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subtitle}</h2>
+    </div>
+  );
+};
 
-class Header extends React.Component {
-  // React class components require render method to be defined
-  render() {
-    // console.log(this.props);
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
-      </div>
-    );
-  }
-}
-
-
-
-class Action extends React.Component {
-  render() {
+const Action = (props) => {
     return (
       <div>
         <button
-          onClick={this.props.handlePick}
-          disabled={!this.props.hasOptions}
+          onClick={props.handlePick}
+          disabled={!props.hasOptions}
         >
           Help me decide!
         </button>
       </div>
     );
-  }
-}
+};
 
-class Options extends React.Component {
-  render() {
-    return (
-      <div>
-        <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-        {
-          this.props.options.map((option, index) => <Option key={index} optionText={option} />)
-        }
-      </div>
-    );
-  }
-}
+const Options = (props) => {
+  return (
+    <div>
+      <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {
+        props.options.map((option, index) => <Option key={index} optionText={option} />)
+      }
+    </div>
+  );
+};
 
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>Option: {this.props.optionText} </p>
-      </div>
-    );
-  }
-}
-
+const Option = (props) => {
+  return (
+    <div>
+      <p>Option: {props.optionText} </p>
+    </div>
+  );
+};
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -132,6 +118,7 @@ class AddOption extends React.Component {
     const error = this.props.handleAddOption(option);
     e.target.elements.option.value = '';
 
+    // local state for AddOption component
     this.setState(() => {
       return { error };
     });
