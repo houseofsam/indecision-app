@@ -6,7 +6,7 @@ class IndecisionApp extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: props.options
+      options: []
     };
   }
   // fetch data from local storage
@@ -62,7 +62,7 @@ class IndecisionApp extends React.Component {
 
     this.setState((prevState) => ({ options: [...prevState.options, option] }))
   }
-  
+
   render() {
     const subtitle = 'Feeling indecisive? You\'ve come to the right place 😄';
 
@@ -85,10 +85,6 @@ class IndecisionApp extends React.Component {
     );
   }
 }
-
-IndecisionApp.defaultProps = {
-  options: []
-};
 
 const Header = (props) => {
   return (
