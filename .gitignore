@@ -2,4 +2,6 @@ node_modules/
 
 src/playground/
 
-public/scripts/app.js
+public/bundle.js
+
+yarn-error.log
