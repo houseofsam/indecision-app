@@ -1,5 +1,5 @@
 .add-option-error {
-  color: $off-white;
+  color: $sea-green;
   font-style: italic;
   margin: $m-size 0 0 0;
   padding: 0 $m-size;
@@ -15,11 +15,12 @@
   background-color: $dark-blue;
   border: none;
   border-bottom: .3rem solid darken($dark-blue, 10%);
-  color: $off-white;
+  color: $sea-green;
   // grow to take up the available space
   flex-grow: 1;
   margin: 0 0 $s-size 0;
   padding: $s-size;
+  outline: none;
 }
 
 @media (min-width: $mobile-breakpoint) {
